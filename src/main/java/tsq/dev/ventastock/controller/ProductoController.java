@@ -21,6 +21,7 @@ public class ProductoController {
     @Autowired
     private ProductoRepository productoRepository;
 
+    // Este metodo registra un producto nuevo
     @PostMapping
     public ResponseEntity<DTORespuestaProducto> registrarProducto(@RequestBody @Valid DTORegistroProducto dtoRegistroProducto,
                                                                   UriComponentsBuilder uriComponentsBuilder){
@@ -31,11 +32,10 @@ public class ProductoController {
         return ResponseEntity.created(url).body(dtoRespuestaProducto);
     }
 
-    // este metodo obtiene todos los productos
+    // Este metodo obtiene todos los productos
     @GetMapping("/todos")
     public ResponseEntity<List<DTOListadoProducto>> listaTodosLosProducto(){
-        List<DTOListadoProducto> productos = productoRepository.findAll()
-                .stream()
+        List<DTOListadoProducto> productos = productoRepository.findAll().stream()
                 .map(DTOListadoProducto::new)
                 .toList();
         return ResponseEntity.ok(productos);
@@ -61,6 +61,7 @@ public class ProductoController {
         return ResponseEntity.ok(productos);
     }
 
+    // Este metodo actualiza todos los datos del producto
     @PutMapping
     @Transactional
     public ResponseEntity actualizarProducto(@RequestBody @Valid DTOActualizarProducto dtoActualizarProducto){
@@ -70,6 +71,7 @@ public class ProductoController {
                 producto.getPrecio(), producto.getStock()));
     }
 
+    // Este metodo actualiza solo el stock de los productos.
     @PutMapping("/actualizarStock")
     @Transactional
     public ResponseEntity actualizarStock(@RequestBody @Valid DTOActualizarStock dtoActualizarStock) {
@@ -77,5 +79,4 @@ public class ProductoController {
         producto.setStock(dtoActualizarStock.getStock());  // Solo actualizas el stock
         return ResponseEntity.ok(new DTOActualizarStock(producto.getId(), producto.getStock()));
     }
-
 }
