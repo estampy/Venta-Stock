@@ -22,13 +22,24 @@ public class Producto {
     private String nombre;
     private Double precio;
     private int stock;
-    private String descripcion;
 
     public Producto(@Valid DTORegistroProducto dtoRegistroProducto) {
         this.codigo = dtoRegistroProducto.codigo();
         this.nombre = dtoRegistroProducto.nombre();
         this.precio = dtoRegistroProducto.precio();
         this.stock = dtoRegistroProducto.stock();
+    }
+
+    public void actualizarDatos(DTOActualizarProducto dtoActualizarProducto){
+        if (dtoActualizarProducto.nombre() != null){
+            this.nombre= dtoActualizarProducto.nombre();
+        }
+        if (dtoActualizarProducto.precio() != null){
+            this.precio = dtoActualizarProducto.precio();
+        }
+        if (dtoActualizarProducto.stock() != 0){
+            this.stock = dtoActualizarProducto.stock();
+        }
     }
 
     public Long getId() {
@@ -65,14 +76,6 @@ public class Producto {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public void setCodigo(String codigo) {

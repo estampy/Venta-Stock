@@ -11,7 +11,5 @@ public record DTORegistroProducto(
         @NotNull
         Double precio,
         @NotNull
-        int stock,
-        @NotBlank
-        String descripcion) {
+        int stock) {
 }

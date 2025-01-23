@@ -5,7 +5,6 @@ public record DTOActualizarProducto(
         String codigo,
         String nombre,
         Double precio,
-        int stock,
-        String descripcion
+        int stock
 ) {
 }

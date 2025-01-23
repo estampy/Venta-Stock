@@ -5,7 +5,6 @@ create table productos(
     nombre varchar(100) not null,
     precio decimal(10,2) not null,
     stock int not null default 0,
-    descripcion varchar(255) not null,
 
     primary key(id)
 );

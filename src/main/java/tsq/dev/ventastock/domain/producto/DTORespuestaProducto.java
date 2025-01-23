@@ -5,6 +5,5 @@ public record DTORespuestaProducto(
         String codigo,
         String nombre,
         Double precio,
-        int stock,
-        String descripcion) {
+        int stock) {
 }
