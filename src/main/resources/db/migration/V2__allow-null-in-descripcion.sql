@@ -1,0 +1,1 @@
+ALTER TABLE productos MODIFY COLUMN descripcion VARCHAR(255) NULL;
