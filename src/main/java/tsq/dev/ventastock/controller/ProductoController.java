@@ -3,13 +3,16 @@ package tsq.dev.ventastock.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import tsq.dev.ventastock.domain.producto.*;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -26,8 +29,8 @@ public class ProductoController {
     public ResponseEntity<DTORespuestaProducto> registrarProducto(@RequestBody @Valid DTORegistroProducto dtoRegistroProducto,
                                                                   UriComponentsBuilder uriComponentsBuilder){
         Producto producto = productoRepository.save(new Producto(dtoRegistroProducto));
-        DTORespuestaProducto dtoRespuestaProducto=new DTORespuestaProducto(producto.getId(), producto.getCodigo(), producto.getNombre(),
-                producto.getPrecio(), producto.getStock());
+        DTORespuestaProducto dtoRespuestaProducto=new DTORespuestaProducto(producto.getId(), producto.getCodigo(),
+                producto.getNombre(),producto.getPrecio(), producto.getStock());
         URI url = uriComponentsBuilder.path("/productos/{id}").buildAndExpand(producto.getId()).toUri();
         return ResponseEntity.created(url).body(dtoRespuestaProducto);
     }
@@ -86,6 +89,7 @@ public class ProductoController {
 //        return ResponseEntity.ok(nuevoCodigo);
 //    }
 
+    // Este metodo busca Producto por Codigo
     @GetMapping("/{codigo}")
     public ResponseEntity<Producto> buscarPorCodigo(@PathVariable String codigo) {
         Optional<Producto> codigoBarras = productoService.buscarPorCodigo(codigo);
