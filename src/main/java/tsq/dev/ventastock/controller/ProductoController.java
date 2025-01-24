@@ -3,9 +3,6 @@ package tsq.dev.ventastock.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -13,6 +10,7 @@ import tsq.dev.ventastock.domain.producto.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/productos")
@@ -20,6 +18,8 @@ public class ProductoController {
 
     @Autowired
     private ProductoRepository productoRepository;
+    @Autowired
+    private ProductoService productoService;
 
     // Este metodo registra un producto nuevo
     @PostMapping
@@ -78,5 +78,18 @@ public class ProductoController {
         Producto producto = productoRepository.getReferenceById(dtoActualizarStock.id());
         producto.setStock(dtoActualizarStock.getStock());  // Solo actualizas el stock
         return ResponseEntity.ok(new DTOActualizarStock(producto.getId(), producto.getStock()));
+    }
+
+//    @PostMapping
+//    public ResponseEntity<Producto> guardarCodigo(@RequestBody Producto producto) {
+//        Producto nuevoCodigo = productoService.guardarCodigo(producto);
+//        return ResponseEntity.ok(nuevoCodigo);
+//    }
+
+    @GetMapping("/{codigo}")
+    public ResponseEntity<Producto> buscarPorCodigo(@PathVariable String codigo) {
+        Optional<Producto> codigoBarras = productoService.buscarPorCodigo(codigo);
+        return codigoBarras.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
