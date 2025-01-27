@@ -3,6 +3,7 @@ package tsq.dev.ventastock.controller;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -79,6 +80,20 @@ public class ProductoController {
         producto.setStock(dtoActualizarStock.getStock());  // Solo actualizas el stock
         return ResponseEntity.ok(new DTOActualizarStock(producto.getId(), producto.getStock()));
     }
+
+//    @PutMapping("/actualizar-stock/{codigo}")
+//    public ResponseEntity<Producto> actualizarStock(@PathVariable String codigo, @RequestBody int stock) {
+//        Optional<Producto> productoOpt = productoRepository.findByCodigo(codigo);
+//
+//        if (productoOpt.isPresent()) {
+//            Producto producto = productoOpt.get();
+//            producto.setStock(stock);
+//            productoRepository.save(producto);
+//            return ResponseEntity.ok(producto);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//        }
+//    }
 
 //    @PostMapping
 //    public ResponseEntity<Producto> guardarCodigo(@RequestBody Producto producto) {
