@@ -1,9 +1,7 @@
-package tsq.dev.ventastock.domain.producto;
+package tsq.dev.ventastock.producto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class ProductoService {
@@ -14,7 +12,7 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 
-    public Optional<Producto> buscarPorCodigo(String codigo) {
-        return productoRepository.findByCodigo(codigo);
+    public Producto buscarPorCodigo(String codigo) {
+        return (Producto) productoRepository.findByCodigo(codigo);
     }
 }

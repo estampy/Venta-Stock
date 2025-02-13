@@ -1,4 +1,4 @@
-package tsq.dev.ventastock.domain.producto;
+package tsq.dev.ventastock.producto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

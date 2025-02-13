@@ -1,4 +1,4 @@
-package tsq.dev.ventastock.domain.producto;
+package tsq.dev.ventastock.producto;
 
 public record DTOListadoProducto(
         Long id,

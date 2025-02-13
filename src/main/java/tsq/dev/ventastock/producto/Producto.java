@@ -1,11 +1,10 @@
-package tsq.dev.ventastock.domain.producto;
+package tsq.dev.ventastock.producto;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Table(name = "productos")
